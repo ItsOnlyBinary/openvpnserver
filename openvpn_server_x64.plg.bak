@@ -4,8 +4,8 @@
 <!ENTITY name      "openvpnserver">
 <!ENTITY author    "peter_sm">
 <!ENTITY plgauthor    "petersm1">
-<!ENTITY version   "2014.12.30">
-<!ENTITY pluginURL "https://raw.githubusercontent.com/&plgauthor;/openvpn_server_x64/master/openvpn_server_x64.plg">
+<!ENTITY version   "2014.12.30a">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&plgauthor;/openvpnserver/master/openvpn_server_x64.plg">
 <!ENTITY pkgURL	 "ftp://ftp.sunet.se/pub/os/Linux/distributions/slackware//">
 <!ENTITY pkgs 	    "/boot/packages/">
 <!ENTITY plugin	 "/boot/config/plugins/&name;">
@@ -46,7 +46,7 @@ openvpnserver version 3 64Bit with easyrsa V3
 get from github as tarball
 -->
 <FILE Name="&plugin;/&name;-&version;.tar.gz">
-<URL>"https://github.com/&plgauthor;/openvpn_server_x64/archive/&version;.tar.gz"</URL>
+<URL>"https://github.com/&plgauthor;/openvpnserver/archive/&version;.tar.gz"</URL>
 </FILE>
 
 <!--
