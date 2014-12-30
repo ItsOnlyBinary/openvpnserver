@@ -1,0 +1,4 @@
+#!/bin/bash
+if [[ $DISCONNECT_ON_UMOUNT == "yes" ]]; then
+	/etc/rc.d/rc.openvpnserver stop
+fi

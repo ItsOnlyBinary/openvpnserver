@@ -1,0 +1,115 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!DOCTYPE PLUGIN [
+<!ENTITY name      "openvpnserver">
+<!ENTITY author    "peter_sm">
+<!ENTITY plgauthor    "petersm1">
+<!ENTITY version   "2014.12.30">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&plgauthor;/openvpn_server_x64/master/openvpn_server_x64.plg">
+<!ENTITY pkgURL	 "ftp://ftp.sunet.se/pub/os/Linux/distributions/slackware//">
+<!ENTITY pkgs 	    "/boot/packages/">
+<!ENTITY plugin	 "/boot/config/plugins/&name;">
+<!ENTITY emhttp	 "/usr/local/emhttp/plugins/&name;">
+]>
+
+<PLUGIN  name="&name;"
+         author="&author;"
+         plgauthor="&plgauthor;"
+         version="&version;"
+         pluginURL="&pluginURL;"
+	 pkgURL="&pkgURL;"
+	 pkgs="&pkgs;"
+	 plugin="&plugin;"
+	 emhttp="&emhttp;">
+>
+<!--
+2014-12-25 - Initial Release
+openvpnserver version 3 64Bit with easyrsa V3
+-->
+
+<FILE Name="&pkgs;tcl-8.6.1-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>&pkgURL;slackware64-14.1/slackware64/tcl/tcl-8.6.1-x86_64-1.txz</URL>
+<MD5>81a2ee6b801ff63a0b96ac8239fc9f26</MD5>
+</FILE>
+
+<FILE Name="&pkgs;expect-5.44.1.15-x86_64-2.txz" Run="upgradepkg --install-new">
+<URL>&pkgURL;slackware64-14.1/slackware64/tcl/expect-5.44.1.15-x86_64-2.txz</URL>
+<MD5>ba1415d7928ade48de4d17c74d65a7a1</MD5>
+</FILE>
+
+<FILE Name="&pkgs;openvpn-2.3.6-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>&pkgURL;slackware64-current/slackware64/n/openvpn-2.3.6-x86_64-1.txz</URL>
+<MD5>6389d4f64e0103b9850f437e60c73166</MD5>
+</FILE>
+
+<!--
+get from github as tarball
+-->
+<FILE Name="&plugin;/&name;-&version;.tar.gz">
+<URL>"https://github.com/&plgauthor;/openvpn_server_x64/archive/&version;.tar.gz"</URL>
+</FILE>
+
+<!--
+The 'install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+mkdir -p /dev/net
+mknod /dev/net/tun c 10 200
+echo 1 > /proc/sys/net/ipv4/ip_forward
+mkdir -p /var/run/openvpnserver/
+ 
+if [ ! -d &emhttp; ]; then
+	mkdir -p &emhttp;
+fi
+
+tar -zxf &plugin;/&name;-&version;.tar.gz --strip=1 -C &emhttp;/
+find &plugin; -type f -iname "*.tar.gz" ! -iname "&name;-&version;.tar.gz" -delete
+mv -f &emhttp;/rc.&name; /etc/rc.d/rc.&name;
+chmod 0770 /etc/rc.d/rc.&name;
+cp -nr &emhttp;/&name; /boot/config/plugins
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+/etc/rc.d/rc.&name; stop
+rm -rf &emhttp;
+rm -f /etc/rc.d/rc.&name;
+rm -f &plugin;/&name;-&version;.tar.gz
+# Cleanup previous plugin installation
+rm -rf /var/local/emhttp/plugins/&name;
+rm -rf /var/run/&name;
+rm -rf /var/log/&name;.log
+rm -rf /var/log/plugins/&name;
+#rm -rf /dev/net
+#mkdir /dev/net
+#mknod /dev/net/tun c 10 200
+#echo 1 > /proc/sys/net/ipv4/ip_forward
+#mkdir /var/run/openvpnserver/
+#mkdir /var/run/&name;/
+</INLINE>
+</FILE>
+
+<FILE Name="/var/local/emhttp/plugins/openvpnserver/check-my-ip.sh" Mode="0770">
+<INLINE>
+<![CDATA[
+# Check my IP script
+#!/bin/bash
+#wget http://ipecho.net/plain -O - -q ; echo
+#curl icanhazip.com
+curl -s --max-time 15 --silent icanhazip.com
+]]>
+</INLINE>
+</FILE>
+
+<FILE Name="/var/log/plugins/openvpnserver">
+<INLINE>
+<![CDATA[
+]]>
+</INLINE>
+</FILE>
+</PLUGIN>

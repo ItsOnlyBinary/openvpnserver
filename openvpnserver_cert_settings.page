@@ -1,0 +1,62 @@
+Menu="openvpnserver:1"
+Title="Cert and Misc Settings "
+---
+
+<div>
+<form name="openvpnserver_cert_settings" method="POST" action="/plugins/openvpnserver/openvpnserver_cert_submit.php" target="progressFrame" onsubmit="validateForm_cert();">
+<table class="tablesorter openvpnserversettings">
+<thead><th colspan="2"><b>OpenVPN Server Cert/Misc Configuration:&nbsp;<img src='/plugins/openvpnserver/images/new_config.png'></b></th><th class="header"></th></thead>
+<table class="tablesorter">
+
+ <?if ($openvpnserver_running == "yes"):?>
+    <div><left><b>To change configuration - Press Stop in "Control Action"</b></center></div>
+    <br />
+  <?endif;?>
+  
+  <?if ($openvpnserver_running != "yes"):?> 
+      <tr>
+       <td colspan="2" align="left">
+     	  <?if ($openvpnserver_running != "yes"):?>
+           <input type="submit" value="Save Below Configuration">
+        <?endif;?>
+       </td>
+      </tr>
+  
+      <tr>
+      <td>Start OpenVPN server during array mount</td>
+      <td>
+      <select name="INSTALL_ON_BOOT" id="INSTALL_ON_BOOT" size="1">
+      <?=mk_option($openvpnserver_cfg['INSTALL_ON_BOOT'], "enable", "Yes");?>
+      <?=mk_option($openvpnserver_cfg['INSTALL_ON_BOOT'], "disable", "No");?>
+      </select>
+      </td>
+      </tr>
+
+      <tr>
+      <td>Disconnect OpenVPN Server when stopping array</td>
+      <td>
+      <select name="DISCONNECT_ON_UMOUNT" id="DISCONNECT_ON_UMOUNT" size="1">
+      <?=mk_option($openvpnserver_cert_cfg['DISCONNECT_ON_UMOUNT'], "no", "No");?>
+      <?=mk_option($openvpnserver_cert_cfg['DISCONNECT_ON_UMOUNT'], "yes", "Yes");?>
+      </select>
+      </td>
+      <tr>
+
+      <tr>
+      <td>Path to store server config files and the Easyrsa V3</td>
+      <td>
+      <input type="text" name="SERVER_PATH" id="SERVER_PATH" value="<?=$openvpnserver_cert_cfg['SERVER_PATH'];?>" title="">
+      </td>
+      </tr>
+
+      <tr>
+      <td>Private key pass phrase for signing cert</td>
+      <td>
+      <input type="text" name="PASSPHRASE" id="PASSPHRASE" style="width:47%" maxlength="20" value="<?=$openvpnserver_cert_cfg['PASSPHRASE'];?>" title="Default is ...">
+      </td>
+      </tr>   
+      
+ <?endif;?>
+    </table>
+ </form> 
+</div> 

@@ -1,0 +1,5 @@
+#!/bin/bash
+source /boot/config/plugins/openvpnserver/openvpnserver.cfg
+if [ $INSTALL_ON_BOOT = "enable" ]; then	
+	/etc/rc.d/rc.openvpnserver start
+fi

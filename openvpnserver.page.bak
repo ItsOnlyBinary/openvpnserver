@@ -1,0 +1,274 @@
+Menu="NetworkServices"
+Icon="openvpnserver.png"
+Version="2014.12.30"
+Author="Peter_sm"
+Type="xmenu"
+Title="OpenVPN Server TUN mode"
+Tabs="true"
+---
+<link type="text/css" rel="stylesheet" href="/plugins/openvpnserver/styles/openvpnserver.css">
+<?php
+$openvpnserver_cfg = parse_ini_file( "/boot/config/plugins/openvpnserver/openvpnserver.cfg");
+$openvpnserver_cert_cfg = parse_ini_file( "/boot/config/plugins/openvpnserver/openvpnserver_cert.cfg");
+$AUTO_SERVER_ADDR = shell_exec("/etc/rc.d/rc.openvpnserver serverip");
+$VALID_USER = shell_exec("/etc/rc.d/rc.openvpnserver view_valid_user");
+$ONLINE_USER = shell_exec("/etc/rc.d/rc.openvpnserver view_online_user");
+$REVOKED_USER = shell_exec("/etc/rc.d/rc.openvpnserver view_revoked_user");
+$openvpnserver_running = file_exists("/var/run/openvpnserver/openvpnserver.pid") ? "yes" : "no";
+$ovpncertsfolder = file_exists($openvpnserver_cert_cfg['SERVER_PATH'] . "/easy-rsa/easyrsa3/pki/ca.crt") ? "yes" : "no";
+$certsw = $openvpnserver_cert_cfg['SERVER_PATH'] . "/easy-rsa/README";
+$ovpncertsoftware = file_exists($certsw) ? "yes" : "no";
+$openvpnserver_config = file_exists($openvpnserver_cert_cfg['SERVER_PATH'] . "/openvpnserver.ovpn") ? "yes" : "no";
+$OPEN_VPN_ONLINE_VER = shell_exec("/etc/rc.d/rc.openvpnserver getonlineversion");
+$OPEN_VPN_INSTALLED = shell_exec("/etc/rc.d/rc.openvpnserver getlocalversion");
+$internet_myip = shell_exec("/var/local/emhttp/plugins/openvpnserver/check-my-ip.sh");
+$LAN_IP = shell_exec("/etc/rc.d/rc.openvpnserver get_gw");
+$VPN_SERVER_IP = shell_exec("/etc/rc.d/rc.openvpnserver get_vpnserver");
+$check_netstat = shell_exec("ip route show");
+$CHECKFOLDERVPNTMP = shell_exec("/etc/rc.d/rc.openvpnserver checkfolder");
+$CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
+
+ if (file_exists('/var/local/emhttp/plugins/openvpnserver/add_client.log'))
+ 	{$add_client_log = file_get_contents('/var/local/emhttp/plugins/openvpnserver/add_client.log');} 
+ 	
+ if (file_exists('/var/log/openvpnserver-status.log')) 
+   {$openvpnststus_log = file_get_contents('/var/log/openvpnserver-status.log');} 
+
+ if (file_exists('/var/log/openvpnserver.log')) 
+   {$openvpn_log = file_get_contents('/var/log/openvpnserver.log');} 
+
+?>	
+<div>
+	<table class="tablesorter openvpnserver">
+	 	<thead>
+ 			<th colspan="2"><b>Status:&nbsp;</b><img src='/plugins/openvpnserver/images/device_status.png'>
+      <?if ($openvpnserver_running=="yes"):?>
+        <span class="green"><b>OpenVPN Server is RUNNING</b></span>
+      <?else:?>
+        <span class="red"><b>OpenVPN Server is NOT RUNNING</b></span>
+      <?endif;?>
+	    </span>
+ 			</th>
+	 		<th class="header"></th>
+ 		</thead>
+	</table>
+ 
+<br />
+
+<div style="border: 0px solid black;">
+    <table class="tablesorter">      
+      <tr>
+      	<thead>
+           <th>WAN IP</th>
+	   <th>unRAID server IP</th>
+   	   <th>LAN Gateway</th>
+      	   <th>VPN Server IP</th>
+      	   <th>OpenVPN Version</th>
+      	</thead>
+      </tr>
+      <tr style="font-weight:bold; background:#FFFFFF;">
+        <td>         
+            <span class="green-text"><?=$internet_myip?></span>        
+        </td>
+        <td>         
+            <span class="green-text"><?=$AUTO_SERVER_ADDR?></span>
+        </td>      
+        <td>         
+            <span class="green-text"><?=$LAN_IP?></span>
+        </td>      
+        <td>         
+            <span class="green-text"><?=$VPN_SERVER_IP?></span>
+        </td>      
+        <td>         
+            <span class="green-text"><?=$OPEN_VPN_INSTALLED?></span>
+        </td>          
+    </tr>      
+    </table>
+  </div>  
+  <br />
+  <div style="border: 0px solid black;">
+    <table class="tablesorter">      
+      <tr>
+      	<thead> 
+        	<th>Valid user</th>
+        	<th>Revoked user</th>
+      	</thead>   
+      </tr>
+          <tr style="font-weight:bold; background:#FFFFFF;">
+         <td>         
+          <span class="green-text"><?=$VALID_USER?></span>        
+        </td>
+         <td>         
+          <span class="red-text"><?=$REVOKED_USER?></span>        
+        </td>
+      </tr>      
+    </table>
+  </div>  
+<br />
+<?if ($openvpnserver_running=="yes"):?>
+  <div style="border: 0px solid black;">
+    <table class="tablesorter">      
+      <tr>
+        <thead>
+        	<th>Online user</th>
+	</thead>
+      </tr>
+             <tr style="font-weight:bold; background:#FFFFFF;">
+             <td>         
+             <span class="green-text"><?=$ONLINE_USER?></span>        
+             </td>
+             </tr>
+    </table>
+  </div>  
+<br />
+<?endif;?>      
+<div>
+<table class="tablesorter">    
+    <tr>
+ 	<thead>
+           <th colspan="2">Control Actions</th>
+        </thead>
+    </tr>  
+          
+     <?if ($openvpnserver_running=="yes"):?>
+        <tr>
+        <td width="30%">
+         <form name="stop_openvpnserver" method="POST" action="/update.htm" target="progressFrame">
+          <input type="hidden" name="cmd" value="/etc/rc.d/rc.openvpnserver stop">
+          <input type="submit" name="runCmd" value="Stop">
+         </form>
+        </td>
+        <td> <span class="green-text">Stop OpenVPN Server</span></td>
+        </tr>
+   
+     <?else:?>
+        <?if ($openvpnserver_config=="yes" and  $ovpncertsfolder=="yes"):?> 
+         <?if ($OPEN_VPN_INSTALLED!=""):?>
+          </tr>
+          <tr>
+          <td width="30%">
+            <form name="start_openvpnserver" method="POST" action="/update.htm" target="progressFrame">
+                <input type="hidden" name="cmd" value="/etc/rc.d/rc.openvpnserver start">
+                <input type="submit" name="runCmd" value="start">
+            </form>
+            </td>
+            <td> <span class="red-text">Start OpenVPN Server</span></td>
+            </tr>
+         <?endif;?>
+       <?endif;?>
+     <?endif;?>
+    </table>
+  </div>
+  <br />
+
+<div>   
+    <?if ($openvpnserver_running != "yes"):?>   
+    <table class="tablesorter">
+      <tr>
+      	<thead>
+	      	<th colspan="3">Server configuration</th>
+      	</thead>
+      </tr>
+      
+      <?if ($CHECKFOLDERVPN == "Yes"):?>
+   
+      <tr>
+       <td width="30%">
+        <form name="openvpnserver_installcert" method="POST" action="/update.htm" target="progressFrame">
+          <input type="hidden" name="cmd" value="/etc/rc.d/rc.openvpnserver download_easy-rsa">
+          <input type="submit" name="runCmd" value="Install RSA key management package (easy-rsa)">
+        </form>
+       </td>
+         <?if ($ovpncertsoftware=="yes"):?>
+              <td align="center" class="green-text"><b>&#10004</b></td>
+              <td> <span class="green-text"></span></td>
+         <?else:?> 	
+              <td align="center" class="red-text"><b>&#10008</b></td>
+        <?endif;?>
+      </tr>
+ 
+       <tr>
+        <td width="30%">
+         <form name="openvpnserver_create_server_cert" method="POST" action="/update.htm" target="progressFrame">
+            <input type="hidden" name="cmd" value="/etc/rc.d/rc.openvpnserver create_server_cert">
+            <input type="submit"  title="This will take a long time......"  name="runCmd" value="Generate server certificates and keys">
+          </form>
+        </td>
+         <?if ($ovpncertsfolder=="yes"):?>
+          <td align="center" class="green-text"><b>&#10004</b></td>
+         	<td> <span class="green-text"></span></td>
+         <?else:?> 	
+         	<td align="center" class="red-text"><b>&#10008</b></td>
+         <?endif;?>
+       </tr>
+        
+       <td><b><span class="black-text">Server config file:</span></b></td>
+          <?if ($openvpnserver_config=="yes"):?>
+         	<td align="center" class="green-text"><b>&#10004</b></td>
+         	<td> <span class="green-text"></span></td>
+          <?else:?> 	
+         	<td align="center" class="red-text"><b>&#10008</b></td>      	
+         <?endif;?>
+  
+  <?endif;?>
+  
+  <?endif;?>
+ </table>
+</div>
+</div>
+
+<script type="text/javascript">
+
+
+
+function validateForm() {
+  document.getElementById('NETWORK').disabled = false;
+  document.getElementById('NETWORK_TEXT').disabled = false;
+  document.getElementById('NETMASK').disabled = false;
+  document.getElementById('SERVER_PORT').disabled = false;
+  document.getElementById('CANONICAL').disabled = false;
+  document.getElementById('PROTOCOL').disabled = false;
+  document.getElementById('CIPHER').disabled = false;
+  document.getElementById('CLIENT').disabled = false;
+  document.getElementById('HASH_ALGO').disabled = false;
+  document.getElementById('GATEWAY').disabled = false;
+  document.getElementById('SUBNET').disabled = false;
+  document.getElementById('LAN_SUBNET').disabled = false;
+  document.getElementById('COMP_LZO').disabled = false;
+  document.getElementById('IPP').disabled = false;
+  document.getElementById('DHCP_1').disabled = false;
+  document.getElementById('TELNET_CONSOLE').disabled = false;
+  document.getElementById('VERB').disabled = false;
+}
+
+function validateForm_cert() {
+  document.getElementById('SERVER_PATH').disabled = false;
+  document.getElementById('DISCONNECT_ON_UMOUNT').disabled = false;
+  document.getElementById('INSTALL_ON_BOOT').disabled = false;
+  document.getElementById('PASSPHRASE').disabled = false;  
+}
+
+function checkRUNNING() {
+  if ("<?=$openvpnserver_running?>" == "yes") {
+  
+    form.NETWORK.disabled = true;
+    form.NETWORK_TEXT.disabled = true;
+    form.NETMASK.disabled = true;
+    form.SERVER_PORT.disabled = true;
+    form.CANONICAL.disabled = true;
+    form.PROTOCOL.disabled = true;
+    form.CIPHER.disabled = true;
+    form.CLIENT.disabled = true;
+    form.HASH_ALGO.disabled = true;
+    form.GATEWAY.disabled = true;
+    form.SUBNET.disabled = true;
+    form.LAN_SUBNET.disabled = true;
+    form.COMP_LZO.disabled = true;
+    form.IPP.disabled = true;
+    form.DHCP_1.disabled = true;
+    form.TELNET_CONSOLE.disabled = true;
+    form.VERB.disabled = true;
+  }
+}
+
+</script>
