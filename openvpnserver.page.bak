@@ -1,6 +1,6 @@
 Menu="NetworkServices"
 Icon="openvpnserver.png"
-Version="2014.12.30a"
+Version="2014.12.30b"
 Author="Peter_sm"
 Type="xmenu"
 Title="OpenVPN Server TUN mode"

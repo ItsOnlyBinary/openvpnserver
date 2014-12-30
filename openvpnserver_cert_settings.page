@@ -43,7 +43,7 @@ Title="Cert and Misc Settings "
       <tr>
 
       <tr>
-      <td>Path to store server config files and the Easyrsa V3</td>
+      <td>Path to store Server, Clients config files and the Easyrsa V3</td>
       <td>
       <input type="text" name="SERVER_PATH" id="SERVER_PATH" value="<?=$openvpnserver_cert_cfg['SERVER_PATH'];?>" title="">
       </td>
