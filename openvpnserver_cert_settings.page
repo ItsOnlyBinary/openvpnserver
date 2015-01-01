@@ -26,8 +26,8 @@ Title="Cert and Misc Settings "
       <td>Start OpenVPN server during array mount</td>
       <td>
       <select name="INSTALL_ON_BOOT" id="INSTALL_ON_BOOT" size="1">
-      <?=mk_option($openvpnserver_cfg['INSTALL_ON_BOOT'], "enable", "Yes");?>
-      <?=mk_option($openvpnserver_cfg['INSTALL_ON_BOOT'], "disable", "No");?>
+      <?=mk_option($openvpnserver_cert_cfg['INSTALL_ON_BOOT'], "enable", "Yes");?>
+      <?=mk_option($openvpnserver_cert_cfg['INSTALL_ON_BOOT'], "disable", "No");?>
       </select>
       </td>
       </tr>

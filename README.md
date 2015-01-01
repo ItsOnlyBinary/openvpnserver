@@ -7,4 +7,6 @@ The plugin are now using EasyRSA V3, that's mean after you have done this upgrad
 You can now chose to create one inline file for the clients! works perfect on iOS & Android!
 2014.12.30
 Some gui updates.
+2015.01.01
+Bug fix in cert settings fixed.
 ">Change Log</a>
