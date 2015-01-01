@@ -8,4 +8,6 @@ You can now chose to create one inline file for the clients! works perfect on iO
         Update the GUI.
 2015.01.01
         Fixed a bug in cert settings page.
+2015.01.01b
+        Fixed a typo.
 ">More info</a>
