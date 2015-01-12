@@ -1,4 +1,5 @@
 #!/bin/bash
+source /boot/config/plugins/openvpnserver/openvpnserver_cert.cfg
 if [[ $DISCONNECT_ON_UMOUNT == "yes" ]]; then
 	/etc/rc.d/rc.openvpnserver stop
 fi

@@ -10,4 +10,6 @@ You can now chose to create one inline file for the clients! works perfect on iO
         Fixed a bug in cert settings page.
 2015.01.01b
         Fixed a typo.
+2015.01.12
+        Fixed autostart.
 ">More info</a>
