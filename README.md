@@ -12,4 +12,6 @@ You can now chose to create one inline file for the clients! works perfect on iO
         Fixed a typo.
 2015.01.12
         Fixed autostart.
+2015.01.12a
+        Fixed autostart.
 ">More info</a>
