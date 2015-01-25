@@ -32,7 +32,7 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
       <tr>
       <td>Dynamic DNS</td>
       <td>
-      <input type="text" style="width:55%" maxlength="25" name="CANONICAL" id="CANONICAL" value="<?=$openvpnserver_cfg['CANONICAL'];?>" title="If you have a URL (like DynDNS), you can enter it here, this will overide your WAN IP in client config files">
+      <input type="text" style="width:55%" maxlength="55" name="CANONICAL" id="CANONICAL" value="<?=$openvpnserver_cfg['CANONICAL'];?>" title="If you have a URL (like DynDNS), you can enter it here, this will overide your WAN IP in client config files">
       </td>
       </tr> 
      

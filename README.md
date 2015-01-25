@@ -14,4 +14,6 @@ You can now chose to create one inline file for the clients! works perfect on iO
         Fixed autostart.
 2015.01.12a
         Fixed autostart.
+2015.01.25
+        Fixed lenght issue in settings.
 ">More info</a>
