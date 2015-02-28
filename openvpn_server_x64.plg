@@ -4,7 +4,7 @@
 <!ENTITY name      "openvpnserver">
 <!ENTITY author    "peter_sm">
 <!ENTITY plgauthor    "petersm1">
-<!ENTITY version   "2015.01.25">
+<!ENTITY version   "2015.02.28">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/&plgauthor;/openvpnserver/master/openvpn_server_x64.plg">
 <!ENTITY pkgURL	 "ftp://ftp.sunet.se/pub/os/Linux/distributions/slackware//">
 <!ENTITY pkgs 	    "/boot/packages/">
@@ -21,7 +21,15 @@
 	 pkgs="&pkgs;"
 	 plugin="&plugin;"
 	 emhttp="&emhttp;">
->
+
+<CHANGES>
+###2015.02.28
+-Added Release notes
+###2015.01.25
+-Previous Releas
+</CHANGES>
+
+
 <!--
 2014-12-25 - Initial Release
 openvpnserver version 3 64Bit with easyrsa V3
