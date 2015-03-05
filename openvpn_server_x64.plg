@@ -4,7 +4,7 @@
 <!ENTITY name      "openvpnserver">
 <!ENTITY author    "peter_sm">
 <!ENTITY plgauthor    "petersm1">
-<!ENTITY version   "2015.02.28">
+<!ENTITY version   "2015.03.05">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/&plgauthor;/openvpnserver/master/openvpn_server_x64.plg">
 <!ENTITY pkgURL	 "ftp://ftp.sunet.se/pub/os/Linux/distributions/slackware//">
 <!ENTITY pkgs 	    "/boot/packages/">
@@ -23,6 +23,8 @@
 	 emhttp="&emhttp;">
 
 <CHANGES>
+###2015.03.05
+-Added command 'modprobe tun' to solve issues some users have.
 ###2015.02.28
 -Added Release notes
 ###2015.01.25
@@ -64,6 +66,7 @@ The 'install' script.
 <INLINE>
 mkdir -p /dev/net
 mknod /dev/net/tun c 10 200
+modprobe tun
 echo 1 > /proc/sys/net/ipv4/ip_forward
 mkdir -p /var/run/openvpnserver/
  
