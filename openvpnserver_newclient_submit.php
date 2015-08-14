@@ -10,7 +10,7 @@ $vpn_type = $_POST['vpn_type'];
 	} 
 
 echo "Please wait while adding new client...";
-shell_exec("/etc/rc.d/rc.openvpnserver add_client $vpn_value $ADD_NEW_CLIENT $NEW_PASSWORD_PKCS12 >/var/local/emhttp/plugins/openvpnserver/add_client.log 2>&1");
+shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver add_client $vpn_value $ADD_NEW_CLIENT $NEW_PASSWORD_PKCS12 >/var/local/emhttp/plugins/openvpnserver/add_client.log 2>&1");
 ?>
 <HTML>
 <HEAD><SCRIPT>var goback=parent.location;</SCRIPT></HEAD>

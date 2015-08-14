@@ -1,6 +1,6 @@
 Menu="NetworkServices"
 Icon="openvpnserver.png"
-Version="2015.05.22b"
+Version="2015.08.14"
 Author="Peter_sm"
 Type="xmenu"
 Title="OpenVPN Server TUN mode"
@@ -10,22 +10,22 @@ Tabs="true"
 <?php
 $openvpnserver_cfg = parse_ini_file( "/boot/config/plugins/openvpnserver/openvpnserver.cfg");
 $openvpnserver_cert_cfg = parse_ini_file( "/boot/config/plugins/openvpnserver/openvpnserver_cert.cfg");
-$AUTO_SERVER_ADDR = shell_exec("/etc/rc.d/rc.openvpnserver serverip");
-$VALID_USER = shell_exec("/etc/rc.d/rc.openvpnserver view_valid_user");
-$ONLINE_USER = shell_exec("/etc/rc.d/rc.openvpnserver view_online_user");
-$REVOKED_USER = shell_exec("/etc/rc.d/rc.openvpnserver view_revoked_user");
+$AUTO_SERVER_ADDR = shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver serverip");
+$VALID_USER = shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver view_valid_user");
+$ONLINE_USER = shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver view_online_user");
+$REVOKED_USER = shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver view_revoked_user");
 $openvpnserver_running = file_exists("/var/run/openvpnserver/openvpnserver.pid") ? "yes" : "no";
 $ovpncertsfolder = file_exists($openvpnserver_cert_cfg['SERVER_PATH'] . "/easy-rsa/easyrsa3/pki/ca.crt") ? "yes" : "no";
 $certsw = $openvpnserver_cert_cfg['SERVER_PATH'] . "/easy-rsa/README";
 $ovpncertsoftware = file_exists($certsw) ? "yes" : "no";
 $openvpnserver_config = file_exists($openvpnserver_cert_cfg['SERVER_PATH'] . "/openvpnserver.ovpn") ? "yes" : "no";
-$OPEN_VPN_ONLINE_VER = shell_exec("/etc/rc.d/rc.openvpnserver getonlineversion");
-$OPEN_VPN_INSTALLED = shell_exec("/etc/rc.d/rc.openvpnserver getlocalversion");
+$OPEN_VPN_ONLINE_VER = shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver getonlineversion");
+$OPEN_VPN_INSTALLED = shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver getlocalversion");
 $internet_myip = shell_exec("/var/local/emhttp/plugins/openvpnserver/check-my-ip.sh");
-$LAN_IP = shell_exec("/etc/rc.d/rc.openvpnserver get_gw");
-$VPN_SERVER_IP = shell_exec("/etc/rc.d/rc.openvpnserver get_vpnserver");
+$LAN_IP = shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver get_gw");
+$VPN_SERVER_IP = shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver get_vpnserver");
 $check_netstat = shell_exec("ip route show");
-$CHECKFOLDERVPNTMP = shell_exec("/etc/rc.d/rc.openvpnserver checkfolder");
+$CHECKFOLDERVPNTMP = shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver checkfolder");
 $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
 
  if (file_exists('/var/local/emhttp/plugins/openvpnserver/add_client.log'))
@@ -134,7 +134,7 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
         <tr>
         <td width="30%">
          <form name="stop_openvpnserver" method="POST" action="/update.htm" target="progressFrame">
-          <input type="hidden" name="cmd" value="/etc/rc.d/rc.openvpnserver stop">
+          <input type="hidden" name="cmd" value="/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver stop">
           <input type="submit" name="runCmd" value="Stop">
          </form>
         </td>
@@ -148,7 +148,7 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
           <tr>
           <td width="30%">
             <form name="start_openvpnserver" method="POST" action="/update.htm" target="progressFrame">
-                <input type="hidden" name="cmd" value="/etc/rc.d/rc.openvpnserver start">
+                <input type="hidden" name="cmd" value="/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver start">
                 <input type="submit" name="runCmd" value="start">
             </form>
             </td>
@@ -175,7 +175,7 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
       <tr>
        <td width="30%">
         <form name="openvpnserver_installcert" method="POST" action="/update.htm" target="progressFrame">
-          <input type="hidden" name="cmd" value="/etc/rc.d/rc.openvpnserver download_easy-rsa">
+          <input type="hidden" name="cmd" value="/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver download_easy-rsa">
           <input type="submit" name="runCmd" value="Install RSA key management package (easy-rsa)">
         </form>
        </td>
@@ -190,7 +190,7 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
        <tr>
         <td width="30%">
          <form name="openvpnserver_create_server_cert" method="POST" action="/update.htm" target="progressFrame">
-            <input type="hidden" name="cmd" value="/etc/rc.d/rc.openvpnserver create_server_cert">
+            <input type="hidden" name="cmd" value="/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver create_server_cert">
             <input type="submit"  title="This will take a long time......"  name="runCmd" value="Generate server certificates and keys">
           </form>
         </td>

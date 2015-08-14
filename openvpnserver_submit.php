@@ -38,8 +38,8 @@ echo "Please wait while updating configuration...";
 
 $file = "/usr/local/emhttp/plugins/openvpnserver/openvpnserver.args";
 file_put_contents($file, $arguments);
-shell_exec("/etc/rc.d/rc.openvpnserver updatecfg");
-shell_exec("/etc/rc.d/rc.openvpnserver writeconf");
+shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver updatecfg");
+shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver writeconf");
 ?>
 
 <HTML>

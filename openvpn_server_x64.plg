@@ -4,7 +4,7 @@
 <!ENTITY name      "openvpnserver">
 <!ENTITY author    "peter_sm">
 <!ENTITY plgauthor    "petersm1">
-<!ENTITY version   "2015.05.22b">
+<!ENTITY version   "2015.08.14">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/&plgauthor;/openvpnserver/master/openvpn_server_x64.plg">
 <!ENTITY pkgURL	 "ftp://ftp.sunet.se/pub/os/Linux/distributions/slackware//">
 <!ENTITY pkgs 	    "/boot/packages/">
@@ -23,6 +23,8 @@
 	 emhttp="&emhttp;">
 
 <CHANGES>
+###2015.08.14
+-Added support for version 6.1
 ###2015.05.22b
 -Fixed logic when setting up mknod.
 ###2015.03.05

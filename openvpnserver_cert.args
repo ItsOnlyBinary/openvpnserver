@@ -1,0 +1,4 @@
+INSTALL_ON_BOOT_NEW="enable"
+DISCONNECT_ON_UMOUNT_NEW="no"
+SERVER_PATH_NEW="/mnt/cache/myVPNserver"
+PASSPHRASE_NEW="unraid"

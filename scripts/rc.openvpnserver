@@ -160,7 +160,7 @@ fi
 
 echo "server $NETWORK $NETMASK" > $SERVER_PATH/openvpnserver.ovpn
 
-LOCAL_SERVER_IP=$(/etc/rc.d/rc.openvpnserver serverip)
+LOCAL_SERVER_IP=$(/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver serverip)
 echo "local $LOCAL_SERVER_IP" >> $SERVER_PATH/openvpnserver.ovpn
 
 echo "dev tun" >> $SERVER_PATH/openvpnserver.ovpn
@@ -188,7 +188,7 @@ if [ "$DHCP_1" == "dhcp-option DNS 8.8.8.8" ]; then
 	echo "push "\"$DHCP_1"\"" >> $SERVER_PATH/openvpnserver.ovpn
 
 else
-	LOCAL_GW=$(/etc/rc.d/rc.openvpnserver get_gw)
+	LOCAL_GW=$(/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver get_gw)
 	echo "push "\"dhcp-option DNS $LOCAL_GW"\"" >> $SERVER_PATH/openvpnserver.ovpn
 fi
 
@@ -229,7 +229,7 @@ if [ "$SUBNET" = "topology subnet" ]; then
 fi
 
 if [ "$LAN_SUBNET" = "Enable" ]; then
-	LANSUBNET=$(/etc/rc.d/rc.openvpnserver get_subnet)
+	LANSUBNET=$(/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver get_subnet)
 	echo "push "\"route $LANSUBNET 255.255.255.0"\"" >> $SERVER_PATH/openvpnserver.ovpn
 	IP_ADDR="`echo $NETWORK | rev | sed s'/0/1/' | rev`"
 fi
@@ -240,7 +240,7 @@ echo "log-append /var/log/openvpnserver.log" >> $SERVER_PATH/openvpnserver.ovpn
 echo "status-version 2" >> $SERVER_PATH/openvpnserver.ovpn
 
 if [ "$TELNET_CONSOLE" = "yes" ]; then
-	SERVERIP=$(/etc/rc.d/rc.openvpnserver serverip)
+	SERVERIP=$(/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver serverip)
 	echo "management $SERVERIP 10000" >> $SERVER_PATH/openvpnserver.ovpn
 fi
 }
@@ -374,7 +374,7 @@ PORT=$SERVER_PORT
 #LOG_DIR="/var/log/openvpnserver_cert"
 
 
-#REMOTE_ADDR=$(/etc/rc.d/rc.openvpnserver serverip)
+#REMOTE_ADDR=$(/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver serverip)
 INTERNET_IP=$(/var/local/emhttp/plugins/openvpnserver/check-my-ip.sh)
 
 if [[ $CANONICAL != "" ]]; then

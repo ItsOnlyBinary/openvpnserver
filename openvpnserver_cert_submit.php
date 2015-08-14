@@ -14,7 +14,7 @@ echo "Please wait while updating configuration for certs and Misc...";
 
 $file = "/usr/local/emhttp/plugins/openvpnserver/openvpnserver_cert.args";
 file_put_contents($file, $arguments);
-shell_exec("/etc/rc.d/rc.openvpnserver updatecfg_cert");
+shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver updatecfg_cert");
 ?>
 
 <HTML>

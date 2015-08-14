@@ -3,7 +3,7 @@ Title="Server config"
 ---
 <link type="text/css" rel="stylesheet" href="/plugins/openvpnserver/styles/openvpnserver.css">
 <?php
-$CHECKFOLDERVPNTMP = shell_exec("/etc/rc.d/rc.openvpnserver checkfolder");
+$CHECKFOLDERVPNTMP = shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver checkfolder");
 $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
 ?>
 <div>
