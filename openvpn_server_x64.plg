@@ -4,7 +4,7 @@
 <!ENTITY name      "openvpnserver">
 <!ENTITY author    "peter_sm">
 <!ENTITY plgauthor    "petersm1">
-<!ENTITY version   "2015.08.14">
+<!ENTITY version   "2015.08.14a">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/&plgauthor;/openvpnserver/master/openvpn_server_x64.plg">
 <!ENTITY pkgURL	 "ftp://ftp.sunet.se/pub/os/Linux/distributions/slackware//">
 <!ENTITY pkgs 	    "/boot/packages/">
@@ -82,10 +82,12 @@ fi
 
 tar -zxf &plugin;/&name;-&version;.tar.gz --strip=1 -C &emhttp;/
 find &plugin; -type f -iname "*.tar.gz" ! -iname "&name;-&version;.tar.gz" -delete
-mv -f &emhttp;/rc.&name; /etc/rc.d/rc.&name;
-chmod 0770 /etc/rc.d/rc.&name;
+#mv -f &emhttp;/rc.&name; /etc/rc.d/rc.&name;
+#chmod 0770 /etc/rc.d/rc.&name;
 #chmod 0770 /usr/local/emhttp/plugins/openvpnserver/event/*
 chmod 0770 &emhttp;/event/*
+chmod 0770 &emhttp;/scripts/*
+
 cp -nr &emhttp;/&name; /boot/config/plugins
 </INLINE>
 </FILE>
