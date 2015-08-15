@@ -4,7 +4,7 @@
 <!ENTITY name      "openvpnserver">
 <!ENTITY author    "peter_sm">
 <!ENTITY plgauthor    "petersm1">
-<!ENTITY version   "2015.08.14a">
+<!ENTITY version   "2015.08.14b">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/&plgauthor;/openvpnserver/master/openvpn_server_x64.plg">
 <!ENTITY pkgURL	 "ftp://ftp.sunet.se/pub/os/Linux/distributions/slackware//">
 <!ENTITY pkgs 	    "/boot/packages/">
@@ -97,9 +97,9 @@ The 'remove' script.
 -->
 <FILE Run="/bin/bash" Method="remove">
 <INLINE>
-/etc/rc.d/rc.&name; stop
+&emhttp;/scripts/rc.&name; stop
 rm -rf &emhttp;
-rm -f /etc/rc.d/rc.&name;
+#rm -f /etc/rc.d/rc.&name;
 rm -f &plugin;/&name;-&version;.tar.gz
 # Cleanup previous plugin installation
 rm -rf /var/local/emhttp/plugins/&name;
