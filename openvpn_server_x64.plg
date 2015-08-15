@@ -23,6 +23,8 @@
 	 emhttp="&emhttp;">
 
 <CHANGES>
+###2015.08.14b
+-Small fix for the remove section in the plugin
 ###2015.08.14
 -Added support for version 6.1
 ###2015.05.22b
