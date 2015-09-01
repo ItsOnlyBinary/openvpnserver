@@ -1,6 +1,6 @@
 Menu="NetworkServices"
 Icon="openvpnserver.png"
-Version="2015.08.15"
+Version="2015.09.01"
 Author="Peter_sm"
 Type="xmenu"
 Title="OpenVPN Server TUN mode"
@@ -133,12 +133,13 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
      <?if ($openvpnserver_running=="yes"):?>
         <tr>
         <td width="30%">
-         <form name="stop_openvpnserver" method="POST" action="/update.htm" target="progressFrame">
-          <input type="hidden" name="cmd" value="/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver stop">
-          <input type="submit" name="runCmd" value="Stop">
-         </form>
-        </td>
-        <td> <span class="green-text">Stop OpenVPN Server</span></td>
+	<form name="start_openvpnserver" method="POST" action="/update.php" target="progressFrame">
+                <input type="hidden" name="#command" value="/plugins/openvpnserver/scripts/rc.openvpnserver">
+                <input type="hidden" name="#arg[1]" value="stop">
+                <input type="submit" value="Stop">
+            </form>
+            </td>
+            <td> <span class="red-text">Stop OpenVPN Server</span></td>
         </tr>
    
      <?else:?>
@@ -147,9 +148,10 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
           </tr>
           <tr>
           <td width="30%">
-            <form name="start_openvpnserver" method="POST" action="/update.htm" target="progressFrame">
-                <input type="hidden" name="cmd" value="/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver start">
-                <input type="submit" name="runCmd" value="start">
+	     <form name="start_openvpnserver" method="POST" action="/update.php" target="progressFrame">
+                <input type="hidden" name="#command" value="/plugins/openvpnserver/scripts/rc.openvpnserver">
+                <input type="hidden" name="#arg[2]" value="start">
+                <input type="submit" value="Start">
             </form>
             </td>
             <td> <span class="red-text">Start OpenVPN Server</span></td>
@@ -174,10 +176,11 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
    
       <tr>
        <td width="30%">
-        <form name="openvpnserver_installcert" method="POST" action="/update.htm" target="progressFrame">
-          <input type="hidden" name="cmd" value="/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver download_easy-rsa">
-          <input type="submit" name="runCmd" value="Install RSA key management package (easy-rsa)">
-        </form>
+        <form name="openvpnserver_installcert" method="POST" action="/update.php" target="progressFrame">
+		<input type="hidden" name="#command" value="/plugins/openvpnserver/scripts/rc.openvpnserver">
+                <input type="hidden" name="#arg[3]" value="download_easy-rsa">
+                <input type="submit" value="Install RSA key management package (Easy-RSA)">
+	</form>
        </td>
          <?if ($ovpncertsoftware=="yes"):?>
               <td align="center" class="green-text"><b>&#10004</b></td>
@@ -189,10 +192,11 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
  
        <tr>
         <td width="30%">
-         <form name="openvpnserver_create_server_cert" method="POST" action="/update.htm" target="progressFrame">
-            <input type="hidden" name="cmd" value="/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver create_server_cert">
-            <input type="submit"  title="This will take a long time......"  name="runCmd" value="Generate server certificates and keys">
-          </form>
+         <form name="openvpnserver_create_server_cert" method="POST" action="/update.php" target="progressFrame">
+		<input type="hidden" name="#command" value="/plugins/openvpnserver/scripts/rc.openvpnserver">
+                <input type="hidden" name="#arg[4]" value="create_server_cert">
+                <input type="submit" value="Generate the server certificates and keys">
+	</form>
         </td>
          <?if ($ovpncertsfolder=="yes"):?>
           <td align="center" class="green-text"><b>&#10004</b></td>
