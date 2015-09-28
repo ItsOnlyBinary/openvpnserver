@@ -4,7 +4,7 @@
 <!ENTITY name      "openvpnserver">
 <!ENTITY author    "peter_sm">
 <!ENTITY plgauthor    "petersm1">
-<!ENTITY version   "2015.09.28a">
+<!ENTITY version   "2015.09.28b">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/&plgauthor;/openvpnserver/master/openvpn_server_x64.plg">
 <!ENTITY pkgURL	 "http://mirrors.slackware.com/slackware/">
 <!ENTITY pkgs 	    "/boot/packages/">
@@ -54,7 +54,7 @@ openvpnserver version 3 64Bit with easyrsa V3
 
 <FILE Name="&pkgs;expect-5.44.1.15-x86_64-2.txz" Run="upgradepkg --install-new">
 <URL>&pkgURL;slackware64-current/slackware64/tcl/expect-5.44.1.15-x86_64-2.txz</URL>
-<MD5>ba1415d7928ade48de4d17c74d65a7a1/MD5>
+<MD5>ba1415d7928ade48de4d17c74d65a7a1</MD5>
 </FILE>
 
 <FILE Name="&pkgs;openvpn-2.3.6-x86_64-1.txz" Run="upgradepkg --install-new">
