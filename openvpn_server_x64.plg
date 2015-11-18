@@ -47,9 +47,9 @@
 openvpnserver version 3 64Bit with easyrsa V3
 -->
 
-<FILE Name="&pkgs;tcl-8.6.1-x86_64-1.txz" Run="upgradepkg --install-new">
-<URL>&pkgURL;slackware64-current/slackware64/tcl/tcl-8.6.4-x86_64-1.txz</URL>
-<MD5>c3e1f25e7a35522dfcf04e64b083b40a</MD5>
+<FILE Name="&pkgs;tcl-8.6.2-x86_64-2.txz" Run="upgradepkg --install-new">
+<URL>&pkgURL;slackware64-current/slackware64/tcl/tcl-8.6.4-x86_64-2.txz</URL>
+<MD5>326f3dfe2faaccd8a640835cd8780405</MD5>
 </FILE>
 
 <FILE Name="&pkgs;expect-5.44.1.15-x86_64-2.txz" Run="upgradepkg --install-new">
