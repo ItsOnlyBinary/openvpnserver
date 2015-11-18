@@ -4,7 +4,7 @@
 <!ENTITY name      "openvpnserver">
 <!ENTITY author    "peter_sm">
 <!ENTITY plgauthor    "petersm1">
-<!ENTITY version   "2015.09.28b">
+<!ENTITY version   "2015.11.18">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/&plgauthor;/openvpnserver/master/openvpn_server_x64.plg">
 <!ENTITY pkgURL	 "http://mirrors.slackware.com/slackware/">
 <!ENTITY pkgs 	    "/boot/packages/">
@@ -23,6 +23,8 @@
 	 emhttp="&emhttp;">
 
 <CHANGES>
+###2015.11.18
+-Update of TCL packages
 ###2015.09.28a
 -Changed Download location for slack packages
 ###2015.09.01
