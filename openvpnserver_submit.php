@@ -29,6 +29,8 @@ $arguments .= "GATEWAY_NEW=\"$GATEWAY\"\n";
 $arguments .= "SUBNET_NEW=\"$SUBNET\"\n";
 $arguments .= "LAN_SUBNET_NEW=\"$LAN_SUBNET\"\n";
 $arguments .= "COMP_LZO_NEW=\"$COMP_LZO\"\n";
+$arguments .= "AUTH_SCRIPT_NEW=\"$AUTH_SCRIPT\"\n";
+$arguments .= "SCRIPT_PATH_NEW=\"$SCRIPT_PATH\"\n";
 $arguments .= "IPP_NEW=\"$IPP\"\n";
 $arguments .= "DHCP_1_NEW=\"$DHCP_1\"\n";
 $arguments .= "TELNET_CONSOLE_NEW=\"$TELNET_CONSOLE\"\n";

@@ -150,6 +150,21 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
       </tr>
       
       <tr>
+      <td>Additional Authentication Script</td>
+      <td><select name="AUTH_SCRIPT" id="AUTH_SCRIPT" size="1" title="Use auth-user-pass-verify as a 2nd level of anthentication">
+      <?=mk_option($openvpnserver_cfg['AUTH_SCRIPT'], "Enable", "Yes");?>
+      <?=mk_option($openvpnserver_cfg['AUTH_SCRIPT'], "Disable", "No");?>
+      </select></td>
+      </tr> 
+
+      <tr>
+      <td>Authentication Script Name</td>
+      <td>
+      <input type="text" style="width:55%" maxlength="55" name="SCRIPT_PATH" id="SCRIPT_PATH" value="<?=$openvpnserver_cfg['SCRIPT_PATH'];?>" title="If using password authentication enter path to the authentication script">
+      </td>
+      </tr> 
+
+      <tr>
       <td>TELNET management console</td>
       <td><select name="TELNET_CONSOLE" id="TELNET_CONSOLE" title="This will get you acess to an TELNET console on UnRAid IP port 10000. Acessing the console, use Putty" size="1">
       <?=mk_option($openvpnserver_cfg['TELNET_CONSOLE'], "No", "No");?>
