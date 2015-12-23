@@ -4,7 +4,7 @@
 <!ENTITY name      "openvpnserver">
 <!ENTITY author    "peter_sm">
 <!ENTITY plgauthor    "petersm1">
-<!ENTITY version   "2015.11.18">
+<!ENTITY version   "2015.12.23">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/&plgauthor;/openvpnserver/master/openvpn_server_x64.plg">
 <!ENTITY pkgURL	 "http://mirrors.slackware.com/slackware/">
 <!ENTITY pkgs 	    "/boot/packages/">
@@ -23,6 +23,8 @@
 	 emhttp="&emhttp;">
 
 <CHANGES>
+###2015.12.23
+-Update of OpenVPN packages to 2.3.9
 ###2015.11.18
 -Update of TCL packages
 ###2015.09.28a
@@ -59,9 +61,9 @@ openvpnserver version 3 64Bit with easyrsa V3
 <MD5>ba1415d7928ade48de4d17c74d65a7a1</MD5>
 </FILE>
 
-<FILE Name="&pkgs;openvpn-2.3.6-x86_64-1.txz" Run="upgradepkg --install-new">
-<URL>&pkgURL;slackware64-current/slackware64/n/openvpn-2.3.6-x86_64-1.txz</URL>
-<MD5>6389d4f64e0103b9850f437e60c73166</MD5>
+<FILE Name="&pkgs;openvpn-2.3.9-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>&pkgURL;slackware64-current/slackware64/n/openvpn-2.3.9-x86_64-1.txz</URL>
+<MD5>895a8991c197c71514ea16eba94403ca</MD5>
 </FILE>
 
 <!--
