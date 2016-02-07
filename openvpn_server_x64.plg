@@ -96,6 +96,7 @@ chmod 0770 &emhttp;/event/*
 chmod 0770 &emhttp;/scripts/*
 
 cp -nr &emhttp;/&name; /boot/config/plugins
+ln -s /usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver /etc/rc.d/
 </INLINE>
 </FILE>
 
