@@ -238,6 +238,7 @@ function validateForm() {
   document.getElementById('GATEWAY').disabled = false;
   document.getElementById('SUBNET').disabled = false;
   document.getElementById('LAN_SUBNET').disabled = false;
+  document.getElementById('COMPRESS').disabled = false;
   document.getElementById('COMP_LZO').disabled = false;
   document.getElementById('IPP').disabled = false;
   document.getElementById('DHCP_1').disabled = false;
@@ -267,6 +268,7 @@ function checkRUNNING() {
     form.GATEWAY.disabled = true;
     form.SUBNET.disabled = true;
     form.LAN_SUBNET.disabled = true;
+    form.COMPRESS.disabled = true;
     form.COMP_LZO.disabled = true;
     form.IPP.disabled = true;
     form.DHCP_1.disabled = true;

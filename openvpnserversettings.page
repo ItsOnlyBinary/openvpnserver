@@ -143,6 +143,14 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
       </tr>
 
       <tr>
+      <td>COMPRESS</td>
+      <td><select name="COMPRESS" id="COMPRESS" size="1" title="Enable compression on the VPN link, changing this, you need to generate new client">
+      <?=mk_option($openvpnserver_cfg['COMPRESS'], "1", "Yes");?>
+      <?=mk_option($openvpnserver_cfg['COMPRESS'], "0", "No");?>
+      </select></td>
+      </tr>
+
+      <tr>
       <td>COMP LZO</td>
       <td><select name="COMP_LZO" id="COMP_LZO" size="1" title="Enable compression on the VPN link, changing this, you need to generate new client">
       <?=mk_option($openvpnserver_cfg['COMP_LZO'], "comp-lzo", "Yes");?>
