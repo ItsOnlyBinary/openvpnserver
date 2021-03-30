@@ -13,14 +13,14 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
 <table class="tablesorter">
 
 <?if ($CHECKFOLDERVPN == "Yes"):?>
-     
+
   <?if ($openvpnserver_running == "yes"):?>
     <div><left><b>To change configuration - Press Stop in "Control Action"</b></center></div>
   <?endif;?>
- 
+
 <form name="openvpnserver_settings" method="POST" action="/plugins/openvpnserver/openvpnserver_submit.php" target="progressFrame" onsubmit="validateForm();">
- <table>   
-   <?if ($openvpnserver_running != "yes"):?> 
+ <table>
+   <?if ($openvpnserver_running != "yes"):?>
       <tr>
       <td colspan="2" align="left">
        <?if ($openvpnserver_running != "yes"):?>
@@ -28,14 +28,14 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
        <?endif;?>
       </td>
       </tr>
-        
+
       <tr>
       <td>Dynamic DNS</td>
       <td>
       <input type="text" style="width:55%" maxlength="55" name="CANONICAL" id="CANONICAL" value="<?=$openvpnserver_cfg['CANONICAL'];?>" title="If you have a URL (like DynDNS), you can enter it here, this will overide your WAN IP in client config files">
       </td>
-      </tr> 
-     
+      </tr>
+
       <tr>
       <td id="NETWORK_TEXT">
       <p>OpenVPN server IP</p>
@@ -43,23 +43,23 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
       <input type="text" style="width:25%" maxlength="15" name="NETWORK" id="NETWORK" value="<?=$openvpnserver_cfg['NETWORK'];?>" title="Default is 10.8.0.0, but can be set to any IP you like for the VPN server, example 10.10.0.0">
       </td>
       </td>
-      </tr> 
-          
+      </tr>
+
       <tr>
       <td>Netmask</td>
       <td>
       <input type="text" style="width:25%" maxlength="15" name="NETMASK" id="NETMASK" value="<?=$openvpnserver_cfg['NETMASK'];?>" title="Default is 255.255.255.0">
       </td>
-      </tr> 
-      
+      </tr>
+
       <tr>
       <td>Allow Client to Client</td>
       <td><select name="CLIENT" id="CLIENT" size="1">
       <?=mk_option($openvpnserver_cfg['CLIENT'], "Enable", "Yes");?>
       <?=mk_option($openvpnserver_cfg['CLIENT'], "", "No");?>
       </select></td>
-      </tr>   
-      
+      </tr>
+
       <tr>
       <td id="DHCP_1_TEXT">
       <p>Pushing DHCP options to clients</p>
@@ -69,14 +69,14 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
       <?=mk_option($openvpnserver_cfg['DHCP_1'], "", "No");?>
       </select>
       </td>
-      </tr>         
+      </tr>
 
       <tr>
       <td>Port for the server</td>
       <td>
       <input type="text" style="width:17%" maxlength="5" name="SERVER_PORT" id="SERVER_PORT" value="<?=$openvpnserver_cfg['SERVER_PORT'];?>" title="You will need to open up this port on your firewall or router">
       </td>
-      </tr> 
+      </tr>
 
       <tr>
       <td>Tunnel Protocol</td>
@@ -85,34 +85,35 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
       <?=mk_option($openvpnserver_cfg['PROTOCOL'], "tcp", "TCP");?>
       </select></td>
       </tr>
-      
+
       <tr>
       <td>Data Encryption</td>
       <td><select name="CIPHER" id="CIPHER" size="1" title="Sets the encryption algorithm to use in the VPN connection, changing this, you need to generate new client">
-      <?=mk_option($openvpnserver_cfg['CIPHER'], "cipher des-ede3-cbc", "Tripple-DES");?>
-      <?=mk_option($openvpnserver_cfg['CIPHER'], "cipher aes-256-cbc", "AES");?>
-      <?=mk_option($openvpnserver_cfg['CIPHER'], "cipher bf-cbc", "Blowfish");?>
+      <?=mk_option($openvpnserver_cfg['CIPHER'], "cipher AES-256-CBC", "AES-256-CBC");?>
+      <?=mk_option($openvpnserver_cfg['CIPHER'], "cipher AES-256-GCM", "AES-256-GCM");?>
+      <?=mk_option($openvpnserver_cfg['CIPHER'], "cipher DES-EDE3-CBC", "Tripple-DES");?>
+      <?=mk_option($openvpnserver_cfg['CIPHER'], "cipher BF-CBC", "Blowfish");?>
       <?=mk_option($openvpnserver_cfg['CIPHER'], "", "None");?>
       </select></td>
       </tr>
-      
+
       <tr>
       <td>Data Authentication</td>
       <td><select name="HASH_ALGO" id="HASH_ALGO" size="1" title="Sets the Data Authentication for VPN connection, changing this, you need to generate new client">
-      <?=mk_option($openvpnserver_cfg['HASH_ALGO'], "auth sha512", "SHA512 ");?>
+      <?=mk_option($openvpnserver_cfg['HASH_ALGO'], "auth sha512", "SHA512");?>
       <?=mk_option($openvpnserver_cfg['HASH_ALGO'], "auth sha256", "SHA256");?>
       <?=mk_option($openvpnserver_cfg['HASH_ALGO'], "", "None");?>
       </select></td>
       </tr>
-           
+
       <tr>
       <td>ifconfig-pool-persist ipp.txt</td>
       <td><select name="IPP" id="IPP" title="Maintain a record of client  virtual IP address associations in this file.If OpenVPN goes down or is restarted, reconnecting clients can be assigned the same virtual IP address from the pool that was previously assigned."  size="1">
       <?=mk_option($openvpnserver_cfg['IPP'], "ipp.txt", "Yes");?>
       <?=mk_option($openvpnserver_cfg['IPP'], "", "No");?>
       </select></td>
-      </tr>           
-                   
+      </tr>
+
       <tr>
       <td id="GATEWAY_TEXT">
       <p>Redirect-gateway</p>
@@ -123,24 +124,24 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
       <?=mk_option($openvpnserver_cfg['GATEWAY'], "Disable", "No");?>
       </select>
       </td>
-      </tr>         
-     
+      </tr>
+
       <tr>
       <td>Topology subnet</td>
       <td><select name="SUBNET" id="SUBNET" size="1">
       <?=mk_option($openvpnserver_cfg['SUBNET'], "topology subnet", "Yes");?>
       <?=mk_option($openvpnserver_cfg['SUBNET'], "Disable", "No");?>
       </select></td>
-      </tr>   
-       
+      </tr>
+
       <tr>
       <td>Push LAN subnet to the clients</td>
       <td><select name="LAN_SUBNET" id="LAN_SUBNET" size="1" title="You need to set this to 'Yes', if 'Redirect-gateway' are set to 'No'">
       <?=mk_option($openvpnserver_cfg['LAN_SUBNET'], "Enable", "Yes");?>
       <?=mk_option($openvpnserver_cfg['LAN_SUBNET'], "Disable", "No");?>
       </select></td>
-      </tr>   
-            
+      </tr>
+
       <tr>
       <td>COMP LZO</td>
       <td><select name="COMP_LZO" id="COMP_LZO" size="1" title="Enable compression on the VPN link, changing this, you need to generate new client">
@@ -148,7 +149,7 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
       <?=mk_option($openvpnserver_cfg['COMP_LZO'], "0", "No");?>
       </select></td>
       </tr>
-      
+
       <tr>
       <td>TELNET management console</td>
       <td><select name="TELNET_CONSOLE" id="TELNET_CONSOLE" title="This will get you acess to an TELNET console on UnRAid IP port 10000. Acessing the console, use Putty" size="1">
@@ -156,7 +157,7 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
       <?=mk_option($openvpnserver_cfg['TELNET_CONSOLE'], "yes", "Yes");?>
       </select></td>
       </tr>
-      
+
       <tr>
       <td>LOG settings</td>
       <td><select name="VERB" id="VERB" title="Verbosity of the log file" size="1">
@@ -171,7 +172,7 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
 <?else:?>
 <span class="red"><b>You need to change/add and save settings in Cert and Misc Settings first!</b></span>
 <?endif;?>
-         
+
   <br />
  </table>
 </form>

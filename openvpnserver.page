@@ -1,9 +1,9 @@
 Menu="NetworkServices"
 Icon="openvpnserver.png"
-Version="2015.12.23"
-Author="Peter_sm"
+Version="2021.03.30"
+Author="Peter_sm, itsonlybinary"
 Type="xmenu"
-Title="OpenVPN Server TUN mode"
+Title="OpenVPN Server"
 Tabs="true"
 ---
 <link type="text/css" rel="stylesheet" href="/plugins/openvpnserver/styles/openvpnserver.css">
@@ -16,7 +16,7 @@ $ONLINE_USER = shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.op
 $REVOKED_USER = shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver view_revoked_user");
 $openvpnserver_running = file_exists("/var/run/openvpnserver/openvpnserver.pid") ? "yes" : "no";
 $ovpncertsfolder = file_exists($openvpnserver_cert_cfg['SERVER_PATH'] . "/easy-rsa/easyrsa3/pki/ca.crt") ? "yes" : "no";
-$certsw = $openvpnserver_cert_cfg['SERVER_PATH'] . "/easy-rsa/README";
+$certsw = $openvpnserver_cert_cfg['SERVER_PATH'] . "/easy-rsa/README.md";
 $ovpncertsoftware = file_exists($certsw) ? "yes" : "no";
 $openvpnserver_config = file_exists($openvpnserver_cert_cfg['SERVER_PATH'] . "/openvpnserver.ovpn") ? "yes" : "no";
 $OPEN_VPN_ONLINE_VER = shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts/rc.openvpnserver getonlineversion");
@@ -29,15 +29,15 @@ $CHECKFOLDERVPNTMP = shell_exec("/usr/local/emhttp/plugins/openvpnserver/scripts
 $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
 
  if (file_exists('/var/local/emhttp/plugins/openvpnserver/add_client.log'))
- 	{$add_client_log = file_get_contents('/var/local/emhttp/plugins/openvpnserver/add_client.log');} 
- 	
- if (file_exists('/var/log/openvpnserver-status.log')) 
-   {$openvpnststus_log = file_get_contents('/var/log/openvpnserver-status.log');} 
+ 	{$add_client_log = file_get_contents('/var/local/emhttp/plugins/openvpnserver/add_client.log');}
 
- if (file_exists('/var/log/openvpnserver.log')) 
-   {$openvpn_log = file_get_contents('/var/log/openvpnserver.log');} 
+ if (file_exists('/var/log/openvpnserver-status.log'))
+   {$openvpnstatus_log = file_get_contents('/var/log/openvpnserver-status.log');}
 
-?>	
+ if (file_exists('/var/log/openvpnserver.log'))
+   {$openvpn_log = file_get_contents('/var/log/openvpnserver.log');}
+
+?>
 <div>
 	<table class="tablesorter openvpnserver">
 	 	<thead>
@@ -52,11 +52,11 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
 	 		<th class="header"></th>
  		</thead>
 	</table>
- 
+
 <br />
 
 <div style="border: 0px solid black;">
-    <table class="tablesorter">      
+    <table class="tablesorter">
       <tr>
       	<thead>
            <th>WAN IP</th>
@@ -67,69 +67,69 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
       	</thead>
       </tr>
       <tr style="font-weight:bold; background:#FFFFFF;">
-        <td>         
-            <span class="green-text"><?=$internet_myip?></span>        
+        <td>
+            <span class="green-text"><?=$internet_myip?></span>
         </td>
-        <td>         
+        <td>
             <span class="green-text"><?=$AUTO_SERVER_ADDR?></span>
-        </td>      
-        <td>         
+        </td>
+        <td>
             <span class="green-text"><?=$LAN_IP?></span>
-        </td>      
-        <td>         
+        </td>
+        <td>
             <span class="green-text"><?=$VPN_SERVER_IP?></span>
-        </td>      
-        <td>         
+        </td>
+        <td>
             <span class="green-text"><?=$OPEN_VPN_INSTALLED?></span>
-        </td>          
-    </tr>      
+        </td>
+    </tr>
     </table>
-  </div>  
+  </div>
   <br />
   <div style="border: 0px solid black;">
-    <table class="tablesorter">      
+    <table class="tablesorter">
       <tr>
-      	<thead> 
+      	<thead>
         	<th>Valid user</th>
         	<th>Revoked user</th>
-      	</thead>   
+      	</thead>
       </tr>
           <tr style="font-weight:bold; background:#FFFFFF;">
-         <td>         
-          <span class="green-text"><?=$VALID_USER?></span>        
+         <td>
+          <span class="green-text"><?=$VALID_USER?></span>
         </td>
-         <td>         
-          <span class="red-text"><?=$REVOKED_USER?></span>        
+         <td>
+          <span class="red-text"><?=$REVOKED_USER?></span>
         </td>
-      </tr>      
+      </tr>
     </table>
-  </div>  
+  </div>
 <br />
 <?if ($openvpnserver_running=="yes"):?>
   <div style="border: 0px solid black;">
-    <table class="tablesorter">      
+    <table class="tablesorter">
       <tr>
         <thead>
         	<th>Online user</th>
 	</thead>
       </tr>
              <tr style="font-weight:bold; background:#FFFFFF;">
-             <td>         
-             <span class="green-text"><?=$ONLINE_USER?></span>        
+             <td>
+             <span class="green-text"><?=$ONLINE_USER?></span>
              </td>
              </tr>
     </table>
-  </div>  
+  </div>
 <br />
-<?endif;?>      
+<?endif;?>
 <div>
-<table class="tablesorter">    
+<table class="tablesorter">
     <tr>
  	<thead>
            <th colspan="2">Control Actions</th>
         </thead>
-    </tr>  
-          
+    </tr>
+
      <?if ($openvpnserver_running=="yes"):?>
         <tr>
         <td width="30%">
@@ -141,9 +141,9 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
             </td>
             <td> <span class="red-text">Stop OpenVPN Server</span></td>
         </tr>
-   
+
      <?else:?>
-        <?if ($openvpnserver_config=="yes" and  $ovpncertsfolder=="yes"):?> 
+        <?if ($openvpnserver_config=="yes" and  $ovpncertsfolder=="yes"):?>
          <?if ($OPEN_VPN_INSTALLED!=""):?>
           </tr>
           <tr>
@@ -163,17 +163,17 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
   </div>
   <br />
 
-<div>   
-    <?if ($openvpnserver_running != "yes"):?>   
+<div>
+    <?if ($openvpnserver_running != "yes"):?>
     <table class="tablesorter">
       <tr>
       	<thead>
 	      	<th colspan="3">Server configuration</th>
       	</thead>
       </tr>
-      
+
       <?if ($CHECKFOLDERVPN == "Yes"):?>
-   
+
       <tr>
        <td width="30%">
         <form name="openvpnserver_installcert" method="POST" action="/update.php" target="progressFrame">
@@ -185,11 +185,11 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
          <?if ($ovpncertsoftware=="yes"):?>
               <td align="center" class="green-text"><b>&#10004</b></td>
               <td> <span class="green-text"></span></td>
-         <?else:?> 	
+         <?else:?>
               <td align="center" class="red-text"><b>&#10008</b></td>
         <?endif;?>
       </tr>
- 
+
        <tr>
         <td width="30%">
          <form name="openvpnserver_create_server_cert" method="POST" action="/update.php" target="progressFrame">
@@ -201,21 +201,21 @@ $CHECKFOLDERVPN = trim($CHECKFOLDERVPNTMP);
          <?if ($ovpncertsfolder=="yes"):?>
           <td align="center" class="green-text"><b>&#10004</b></td>
          	<td> <span class="green-text"></span></td>
-         <?else:?> 	
+         <?else:?>
          	<td align="center" class="red-text"><b>&#10008</b></td>
          <?endif;?>
        </tr>
-        
+
        <td><b><span class="black-text">Server config file:</span></b></td>
           <?if ($openvpnserver_config=="yes"):?>
          	<td align="center" class="green-text"><b>&#10004</b></td>
          	<td> <span class="green-text"></span></td>
-          <?else:?> 	
-         	<td align="center" class="red-text"><b>&#10008</b></td>      	
+          <?else:?>
+         	<td align="center" class="red-text"><b>&#10008</b></td>
          <?endif;?>
-  
+
   <?endif;?>
-  
+
   <?endif;?>
  </table>
 </div>
@@ -249,12 +249,12 @@ function validateForm_cert() {
   document.getElementById('SERVER_PATH').disabled = false;
   document.getElementById('DISCONNECT_ON_UMOUNT').disabled = false;
   document.getElementById('INSTALL_ON_BOOT').disabled = false;
-  document.getElementById('PASSPHRASE').disabled = false;  
+  document.getElementById('PASSPHRASE').disabled = false;
 }
 
 function checkRUNNING() {
   if ("<?=$openvpnserver_running?>" == "yes") {
-  
+
     form.NETWORK.disabled = true;
     form.NETWORK_TEXT.disabled = true;
     form.NETMASK.disabled = true;

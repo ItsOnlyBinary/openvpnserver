@@ -15,10 +15,9 @@ Title="Logs"
      	<tr>
 	<td><textarea class="tooltip" title="Information from 'ip route show'  is displayed here.." wrap="hard" readonly="yes" style="width: 800px; height: 130px;color: green;font-size: 8pt"><?php echo $check_netstat; ?></textarea></td>
      	</tr>
-      	<td><textarea class="tooltip" title="OpenVPN status" wrap="hard" readonly="yes" style="width: 800px; height: 160px;color: green;font-size: 8pt"><?php echo $openvpnststus_log; ?></textarea></td>
+      	<td><textarea class="tooltip" title="OpenVPN status" wrap="hard" readonly="yes" style="width: 800px; height: 160px;color: green;font-size: 8pt"><?php echo $openvpnstatus_log; ?></textarea></td>
      	<br />
 <br />
 
 </table>
 </div>
-  
